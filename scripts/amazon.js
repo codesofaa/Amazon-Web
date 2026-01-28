@@ -61,7 +61,7 @@ document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
-    // add a message timeout id
+  // added to cart message timeout id
   let addedMessageTimeoutId;
 
   function updateCartQuantity() {
@@ -76,6 +76,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   }
   
   function addedToCartMessage(productId) {
+    
     const addedToCart = document.querySelector(`.js-added-to-cart-${productId}`)
 
     addedToCart.classList.add('added-to-cart-visible');
