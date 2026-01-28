@@ -62,10 +62,8 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
     // add a message timeout id
   let addedMessageTimeoutId;
-  
-  button.addEventListener("click", () => {
-    const { productId } = button.dataset;
 
+  function addToCart(productId) {
     let matchingItem;
 
     // for quantity selector
@@ -91,7 +89,9 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         quantity
       });
     }
+  };
 
+  function updateCartQuantity() {
     //for cart quantity to display
     let cartQuantity = 0;
     // loop each cart quantity
@@ -100,13 +100,14 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     });
 
     document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-
+  }
+  
+  function addedToCartMessage(productId) {
     const addedToCart = document.querySelector(`.js-added-to-cart-${productId}`)
 
     addedToCart.classList.add('added-to-cart-visible');
 
-// check if there's a previous timeout
-    
+    // check if there's a previous timeout
     if (addedMessageTimeoutId) {
       clearTimeout(addedMessageTimeoutId);
     };
@@ -116,6 +117,14 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     }, 2000);
 
     addedMessageTimeoutId = timeoutId;
+  };
+
+  button.addEventListener("click", () => {
+    const { productId } = button.dataset;
+    
+    addToCart(productId);
+    updateCartQuantity();    
+    addedToCartMessage(productId);
 
   });
 });
